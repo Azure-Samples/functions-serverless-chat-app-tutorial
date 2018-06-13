@@ -1,0 +1,106 @@
+<html>
+
+<head>
+  <title>Simple Chat</title>
+  <script>
+    window.apiBaseUrl = 'http://localhost:7071';
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="signalr-demo">
+      <form v-on:submit.prevent="sendNewMessage">
+        message: <input type="text" v-model="newMessage" id="message-box" class="form-control" />
+      </form>
+      <div v-if="!ready">Loading...</div>
+      <div v-if="ready">
+        <hr />
+        <ul>
+            <li v-for="message in messages">
+              {{ message.sender }}: {{ message.text }}
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://unpkg.com/@aspnet/signalr@1.0.0-rc1-final/dist/browser/signalr.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const data = {
+      username: '',
+      newMessage: '',
+      messages: [],
+      ready: false
+    };
+    const app = new Vue({
+      el: '#app',
+      data: data,
+      methods: {
+        sendNewMessage: function() {
+          sendMessage(this.username, this.newMessage);
+          this.newMessage = '';
+        }
+      }
+    });
+    const apiBaseUrl = window.apiBaseUrl;
+    const hubName = 'simplechat';
+    while (!data.username && data.username !== null) {
+      data.username = prompt('Enter a username');
+    }
+    
+    if (data.username !== null) {
+      data.ready = true;
+      console.log('retrieving messages');
+      getMessages().then(messages => {
+        for(let m of messages.reverse()) {
+          newMessage(m);
+        }
+      });
+      getConnectionInfo().then(info => {
+        const options = {
+          accessTokenFactory: () => info.accessKey
+        };
+        const connection = new signalR.HubConnectionBuilder()
+          .withUrl(info.endpoint, options)
+          .configureLogging(signalR.LogLevel.Information)
+          .build();
+          
+        connection.on('newMessage', newMessage);
+        connection.onclose(() => console.log('disconnected'));
+        console.log('connecting...');
+        connection.start()
+          .then(() => console.log('connected!'))
+          .catch(console.error);
+      }).catch(console.error);
+    }
+    function getAxiosConfig() {
+      const config = {};
+      return config;
+    }
+    function getConnectionInfo() {
+      return axios.post(`${apiBaseUrl}/api/SignalRInfo`, null, getAxiosConfig())
+        .then(resp => resp.data);
+    }
+    function sendMessage(sender, messageText) {
+      return axios.post(`${apiBaseUrl}/api/messages`, {
+        sender: sender,
+        text: messageText
+      }, getAxiosConfig()).then(resp => resp.data);
+    }
+    function getMessages() {
+      return axios.get(`${apiBaseUrl}/api/messages`, getAxiosConfig())
+        .then(resp => resp.data);
+    }
+    function newMessage(message) {
+      if (!message.sender) {
+        message.sender = "anonymous";
+      }
+      data.messages.unshift(message);
+    }
+  </script>
+</body>
+
+</html>
