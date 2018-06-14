@@ -177,7 +177,11 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. When the functions runtime is successfully started, the terminal output will display a URL for the local **CreateMessage** endpoint (by default, it is `http://localhost:7071/api/messages`).
 1. Open Postman. Postman is an application to send HTTP requests.
 1. Select `File > Import` from the menu.
-1. Choose **Import from link** and paste in `{URL here}`. This loads a collection of HTTP requests for testing the function app locally.
+1. Choose **Import from link** and paste in
+    ```
+    https://raw.githubusercontent.com/Azure-Samples/functions-serverless-chat-app-tutorial/master/requests/SignalRChat.postman_collection.json`
+    ```
+    This loads a collection of HTTP requests for testing the function app locally.
 1. In the **SignalR Chat** collection, select the **Create a message** request.
 1. Confirm the URL matches the one outputted by the function host and there is JSON message in the request body.
 1. Click **Send**. The function app should return an HTTP status of 200.
@@ -258,7 +262,7 @@ The chat application's UI is a simple single page application (SPA) created with
 
 1. In VS Code, create a new folder named **content** at the root of the main project folder.
 1. In the **content** folder, create a new file named **index.html**.
-1. Copy and paste the content of **{file here}**.
+1. Copy and paste the content of **[index.html](https://raw.githubusercontent.com/Azure-Samples/functions-serverless-chat-app-tutorial/master/snippets/index.html)**.
 1. Press **F5** to run the function app locally (it may already be running) and attach a debugger.
 1. With **index.html** open, start Live Server by opening the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) and selecting **Live Server: Open with Live Server**. Live Server will open the application in a browser.
 1. When the application prompts for a username, enter one. If you tested the function earlier, messages from your testing session will appear.
