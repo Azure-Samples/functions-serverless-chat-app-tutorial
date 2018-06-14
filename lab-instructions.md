@@ -35,12 +35,14 @@ The following software is required to build this tutorial.
 1. Click on the **New** (**+**) button for creating a new Azure resource.
 1. Under **Databases**, select **Azure Cosmos DB**.
 1. Enter the following information.
+
     | Name | Value |
     |---|---|
     | ID | A unique name for the Cosmos DB account |
     | API | SQL |
     | Resource group | New |
     | Location | Select a location close to you |
+    
 1. Click **Create**.
 
 ### Create an Azure SignalR Service instance
@@ -48,12 +50,14 @@ The following software is required to build this tutorial.
 1. Click on the **New** (**+**) button for creating a new Azure resource.
 1. Search for **SignalR Service** and select it.
 1. Enter the following information.
+
     | Name | Value |
     |---|---|
     | Resource name | A unique name for the SignalR Service instance |
     | Resource group | Select the same resource group as the Cosmos DB account |
     | Location | Select a location close to you |
     | Pricing Tier | Free |
+    
 1. Click **Create**.
 
 
@@ -121,12 +125,14 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 1. Search for and select the **Azure Functions: Create Function** command.
 1. When prompted, provide the following information.
+
     | Name | Value |
     |---|---|
     | Function app folder | select the main project folder |
     | Template | HTTP Trigger |
     | Name | CreateMessage |
     | Authorization level | Anonymous |
+    
     A folder named **CreateMessage** is created that contains the new function.
 1. Open **CreateMessage/function.json** to configure bindings for the function. Modify the content of the file to the following.
     ```javascript
@@ -196,12 +202,14 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 1. Search for and select the **Azure Functions: Create Function** command.
 1. When prompted, provide the following information.
+
     | Name | Value |
     |---|---|
     | Function app folder | select the main project folder |
     | Template | HTTP Trigger |
     | Name | GetMessages |
     | Authorization level | Anonymous |
+    
     A folder named **GetMessages** is created that contains the new function.
 1. Open **GetMessages/function.json** to configure bindings for the function. Modify the content of the file to the following.
     ```javascript
@@ -282,12 +290,14 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 1. Search for and select the **Azure Functions: Create Function** command.
 1. When prompted, provide the following information.
+
     | Name | Value |
     |---|---|
     | Function app folder | select the main project folder |
     | Template | HTTP Trigger |
     | Name | SignalRInfo |
     | Authorization level | Anonymous |
+    
     A folder named **SignalRInfo** is created that contains the new function.
 1. Open **SignalRInfo/function.json** to configure bindings for the function. Modify the content of the file to the following. This adds an input binding that generates valid credentials for a client to connect to an Azure SignalR Service hub named `chat`.
     ```javascript
@@ -400,6 +410,7 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 1. Search for and select the **Azure Functions: Deploy to Function App** command.
 1. When prompted, provide the following information.
+
     | Name | Value |
     |---|---|
     | Folder to deploy | Select the main project folder |
@@ -410,6 +421,7 @@ Next, you will integrate Azure SignalR Service into your application to allow me
     | Storage account | Select **Create new storage account** |
     | Storage account name | Enter a unique name (3-24 characters, alphanumeric only) |
     | Location | Select a location close to you |
+    
     A new function app is created in Azure and the deployment begins.
 1. If prompted to switch the function app version from latest to beta, select **Yes**.
 
@@ -418,6 +430,7 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 1. Search for and select the **Azure Functions: Upload local settings** command.
 1. When prompted, provide the following information.
+
     | Name | Value |
     |---|---|
     | Local settings file | local.settings.json |
@@ -448,6 +461,7 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
 1. Click on the **New** (**+**) button for creating a new Azure resource.
 1. Under **Storage**, select **Storage account**.
 1. Enter the following information.
+
     | Name | Value |
     |---|---|
     | Name | A unique name for the blob storage account |
@@ -459,6 +473,7 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
     | Access tier | Hot |
     | Secure transfer required | Enabled |
     | Resource group | Select the same resource group as the Cosmos DB account |
+    
 1. Click **Create**.
 1. When the storage account is created, open it in the Azure portal.
 1. Select **Static website** in the left navigation.
