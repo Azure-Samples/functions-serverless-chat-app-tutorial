@@ -61,7 +61,7 @@ The following software is required to build this tutorial.
 1. Click **Create**.
 
 
-## Initialize a function app
+## Initialize the function app
 
 ### Create a new Azure Functions project
 
@@ -96,16 +96,16 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. Replace the file's contents with the following.
     ```javascript
     {
-    "IsEncrypted": false,
-    "Values": {
-        "AzureSignalRConnectionString": "<signalr-connection-string>",
-        "AzureWebJobsCosmosDBConnectionString": "<cosmosdb-connection-string>",
-        "WEBSITE_NODE_DEFAULT_VERSION": "8.11.1"
-    }
-    },
-    "Host": {
-        "LocalHttpPort": 7071,
-        "CORS": "*"
+        "IsEncrypted": false,
+        "Values": {
+            "AzureSignalRConnectionString": "<signalr-connection-string>",
+            "AzureWebJobsCosmosDBConnectionString": "<cosmosdb-connection-string>",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.11.1"
+        },
+        "Host": {
+            "LocalHttpPort": 7071,
+            "CORS": "*"
+        }
     }
     ```
     * Enter the Azure SignalR Service connection string into a setting named `AzureSignalRConnectionString`. Obtain the value from the **Keys** page in the Azure SignalR Service resource in the Azure portal.
