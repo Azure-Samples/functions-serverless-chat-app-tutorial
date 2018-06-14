@@ -108,7 +108,7 @@ When running and debugging the Azure Functions runtime locally, application sett
         "CORS": "*"
     }
     ```
-    * Enter the Azure SignalR Service connection string into a setting named `AzureSignalRConnectionString1. Obtain the value from the **Keys** page in the Azure SignalR Service resource in the Azure portal.
+    * Enter the Azure SignalR Service connection string into a setting named `AzureSignalRConnectionString`. Obtain the value from the **Keys** page in the Azure SignalR Service resource in the Azure portal.
     * Enter the Azure Cosmos DB connection string into a setting named `AzureWebJobsCosmosDBConnectionString`. Obtain the value from the **Keys** page in the Cosmos DB account in the Azure portal.
     * The `WEBSITE_NODE_DEFAULT_VERSION` setting is not used locally, but is required when deployed to Azure.
     * The `Host` section configures the port and CORS settings for the local Functions host.
