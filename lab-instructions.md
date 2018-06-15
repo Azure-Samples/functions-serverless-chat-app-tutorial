@@ -499,6 +499,18 @@ Although there is a CORS setting in **local.settings.json**, it is not propagate
 
 > In a real-world application, instead of allowing CORS on all domains (`*`), a more secure approach is to enter specific CORS entries for each domains that requires it.
 
+### Update function app URL in chat UI
+
+1. In the Azure portal, navigate to the function app's overview page.
+1. Copy the function app's URL.
+
+    ![](media/functions-get-url-screenshot.png)
+
+1. In VS Code, open **index.html** and replace the value of `window.apiBaseUrl` with the function app's URL.
+1. Save the file.
+
+    ![](media/vscode-paste-function-url-screenshot.png)
+
 ### Deploy web UI to blob storage
 
 The web UI will be hosted using Azure Blob Storage's static websites feature.
