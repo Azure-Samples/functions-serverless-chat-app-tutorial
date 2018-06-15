@@ -435,7 +435,13 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 
 ## Deploy to Azure
 
-### Create an deploy function app
+### Log into Azure
+
+1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
+1. Search for and select the **Azure: Sign in** command.
+1. Follow the instructions to complete the sign in process in your browser.
+
+### Deploy function app
 
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 1. Search for and select the **Azure Functions: Deploy to Function App** command.
@@ -453,7 +459,9 @@ Next, you will integrate Azure SignalR Service into your application to allow me
     | Location | Select a location close to you |
     
     A new function app is created in Azure and the deployment begins.
-1. If prompted to switch the function app version from latest to beta, select **Yes**.
+1. If prompted to switch the function app version from *latest* to *beta*, select **Update remote runtime**.
+
+    ![](media/vscode-update-function-version-screenshot.png)
 
 ### Upload function app local settings
 
@@ -470,6 +478,8 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 
 Local settings are uploaded to the function app in Azure. If prompted to overwrite existing settings, select **Yes to all**.
 
+![](media/vscode-update-function-settings-screenshot.png)
+
 ### Enable function app cross origin resource sharing (CORS)
 
 Although there is a CORS setting in **local.settings.json**, it is not propagated to the function app in Azure. You need to set it separately.
@@ -478,9 +488,14 @@ Although there is a CORS setting in **local.settings.json**, it is not propagate
 1. Search for and select the **Azure Functions: Open in portal** command.
 1. Select the subscription and function app name to open the function app in the Azure portal.
 1. Under the **Platform features** tab, select **CORS**.
+
+    ![](media/functions-platform-features-screenshot.png)
+
 1. Add an entry with the value `*`.
 1. Remove all other existing entries.
 1. Click **Save** to persist the CORS settings.
+
+    ![](media/functions-cors-screenshot.png)
 
 > In a real-world application, instead of allowing CORS on all domains (`*`), a more secure approach is to enter specific CORS entries for each domains that requires it.
 
@@ -497,22 +512,32 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
     | Name | A unique name for the blob storage account |
     | Deployment model | Resource manager |
     | Account kind | StorageV2 (general purpose V2) |
-    | Location | Select a location close to you |
+    | Location | Select West Central US or West US 2 (only regions supported in Public Preview) |
     | Replication | Locally-redundant storage (LRS) |
     | Performance | Standard |
     | Access tier | Hot |
     | Secure transfer required | Enabled |
     | Resource group | Select the same resource group as the Cosmos DB account |
     
+    ![](media/create-storage-screenshot.png)
+
 1. Click **Create**.
 1. When the storage account is created, open it in the Azure portal.
-1. Select **Static website** in the left navigation.
+1. Select **Static website (preview)** in the left navigation.
 1. Select **Enable**.
 1. Enter `index.html` as the **Index document name**.
 1. Click **Save**.
+
+    ![](media/storage-enable-static-websites-screenshot.png)
+
 1. Click on the **$web** link on the page to open the blob container.
 1. Click **Upload** and upload all the files in the **content** folder.
+
+    ![](media/storage-upload-screenshot.png)
+
 1. Go back to the **Static website** page. Copy the **Primary endpoint** address and open it in a browser.
+
+    ![](media/storage-primary-endpoint-screenshot.png)
 
 The chat application will appear. Congratulations on creating and deploying a serverless chat application to Azure!
 
