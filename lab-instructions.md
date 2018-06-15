@@ -443,8 +443,8 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 
 ### Deploy function app
 
-1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
-1. Search for and select the **Azure Functions: Deploy to Function App** command.
+1. Select the Azure icon on the VS Code activity bar (left side).
+1. Hover your mouse over the **Functions** pane and click the **Deploy to Function App** button.
 1. When prompted, provide the following information.
 
     | Name | Value |
