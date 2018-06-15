@@ -43,7 +43,7 @@ The following software is required to build this tutorial.
     | Resource group | New |
     | Location | Select a location close to you |
     
-    ![](media/create-cosmosdb-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/create-cosmosdb-screenshot.png)
 
 1. Click **Create**.
 
@@ -60,7 +60,7 @@ The following software is required to build this tutorial.
     | Location | Select a location close to you |
     | Pricing Tier | Free |
 
-    ![](media/create-signalr-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/create-signalr-screenshot.png)
     
 1. Click **Create**.
 
@@ -71,7 +71,7 @@ The following software is required to build this tutorial.
 
 1. In a new VS Code window, use `File > Open Folder` in the menu to create and open an empty folder in an appropriate location. This will be the main project folder for the application that you will build.
 
-    ![](media/vscode-new-folder-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-new-folder-screenshot.png)
 
 1. Using the Azure Functions extension in VS Code, initialize a Function app in the main project folder.
     1. Open the Command Palette in VS Code by selecting `View > Command Palette` from the menu (shortcut `Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
@@ -79,7 +79,7 @@ The following software is required to build this tutorial.
     1. The main project folder should appear. Select it and press Enter (or use "Browse" to locate it).
     1. In the prompt to select a language, choose JavaScript and press Enter.
 
-    ![](media/vscode-new-function-project-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-new-function-project-screenshot.png)
 
 ### Install function app extensions
 
@@ -96,7 +96,7 @@ This tutorial uses Azure Functions bindings to interact with Azure Cosmos DB and
     func extensions install -p AzureAdvocates.WebJobs.Extensions.SignalRService -v 0.2.0-alpha
     ```
 
-    ![](media/vscode-install-func-extensions-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-install-func-extensions-screenshot.png)
 
 ### Configure application settings
 
@@ -125,7 +125,7 @@ When running and debugging the Azure Functions runtime locally, application sett
     * The `Host` section configures the port and CORS settings for the local Functions host.
 1. Save the file.
 
-    ![](media/vscode-localsettings-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-localsettings-screenshot.png)
 
 
 ## Create Azure Functions to save and retrieve chat messages
@@ -203,22 +203,22 @@ When running and debugging the Azure Functions runtime locally, application sett
     ```
     This loads a collection of HTTP requests for testing the function app locally.
 
-    ![](media/postman-import-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/postman-import-screenshot.png)
 
 1. In the **SignalR Chat** collection, select the **Create a message** request.
 1. Confirm the URL matches the one outputted by the function host and there is JSON message in the request body.
 1. Click **Send**. The function app should return an HTTP status of 200.
 
-    ![](media/postman-test-createmessage-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/postman-test-createmessage-screenshot.png)
 
 1. In the Azure portal, open the Cosmos DB account resource you created earlier.
 1. Using the Cosmos DB Data Explorer, locate the **messages** collection in the **chat** database. The message sent from Postman should appear as a document in the collection.
 
-    ![](media/cosmosdb-data-explorer-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/cosmosdb-data-explorer-screenshot.png)
 
 1. Press the **Disconnect** button to disconnect the debugger from the function host.
 
-    ![](media/vscode-disconnect-functions-debug-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-disconnect-functions-debug-screenshot.png)
 
 ### GetMessages function
 
@@ -290,7 +290,7 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. Click **Send**. The function app should return the messages from Cosmos DB.
 1. Press the **Disconnect** button to disconnect the debugger from the function host.
 
-    ![](media/postman-test-getmessages-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/postman-test-getmessages-screenshot.png)
 
 
 ## Create and run the chat client web user interface
@@ -461,7 +461,7 @@ Next, you will integrate Azure SignalR Service into your application to allow me
     A new function app is created in Azure and the deployment begins.
 1. If prompted to switch the function app version from *latest* to *beta*, select **Update remote runtime**.
 
-    ![](media/vscode-update-function-version-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-update-function-version-screenshot.png)
 
 ### Upload function app local settings
 
@@ -478,7 +478,7 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 
 Local settings are uploaded to the function app in Azure. If prompted to overwrite existing settings, select **Yes to all**.
 
-![](media/vscode-update-function-settings-screenshot.png)
+![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-update-function-settings-screenshot.png)
 
 ### Enable function app cross origin resource sharing (CORS)
 
@@ -489,13 +489,13 @@ Although there is a CORS setting in **local.settings.json**, it is not propagate
 1. Select the subscription and function app name to open the function app in the Azure portal.
 1. Under the **Platform features** tab, select **CORS**.
 
-    ![](media/functions-platform-features-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/functions-platform-features-screenshot.png)
 
 1. Add an entry with the value `*`.
 1. Remove all other existing entries.
 1. Click **Save** to persist the CORS settings.
 
-    ![](media/functions-cors-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/functions-cors-screenshot.png)
 
 > In a real-world application, instead of allowing CORS on all domains (`*`), a more secure approach is to enter specific CORS entries for each domains that requires it.
 
@@ -504,12 +504,12 @@ Although there is a CORS setting in **local.settings.json**, it is not propagate
 1. In the Azure portal, navigate to the function app's overview page.
 1. Copy the function app's URL.
 
-    ![](media/functions-get-url-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/functions-get-url-screenshot.png)
 
 1. In VS Code, open **index.html** and replace the value of `window.apiBaseUrl` with the function app's URL.
 1. Save the file.
 
-    ![](media/vscode-paste-function-url-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-paste-function-url-screenshot.png)
 
 ### Deploy web UI to blob storage
 
@@ -531,7 +531,7 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
     | Secure transfer required | Enabled |
     | Resource group | Select the same resource group as the Cosmos DB account |
     
-    ![](media/create-storage-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/create-storage-screenshot.png)
 
 1. Click **Create**.
 1. When the storage account is created, open it in the Azure portal.
@@ -540,16 +540,16 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
 1. Enter `index.html` as the **Index document name**.
 1. Click **Save**.
 
-    ![](media/storage-enable-static-websites-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/storage-enable-static-websites-screenshot.png)
 
 1. Click on the **$web** link on the page to open the blob container.
 1. Click **Upload** and upload all the files in the **content** folder.
 
-    ![](media/storage-upload-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/storage-upload-screenshot.png)
 
 1. Go back to the **Static website** page. Copy the **Primary endpoint** address and open it in a browser.
 
-    ![](media/storage-primary-endpoint-screenshot.png)
+    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/storage-primary-endpoint-screenshot.png)
 
 The chat application will appear. Congratulations on creating and deploying a serverless chat application to Azure!
 
