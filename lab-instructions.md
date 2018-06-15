@@ -33,7 +33,9 @@ The following software is required to build this tutorial.
 ### Create an Azure Cosmos DB account
 
 1. Click on the **New** (**+**) button for creating a new Azure resource.
+
 1. Under **Databases**, select **Azure Cosmos DB**.
+
 1. Enter the following information.
 
     | Name | Value |
@@ -47,10 +49,13 @@ The following software is required to build this tutorial.
 
 1. Click **Create**.
 
+
 ### Create an Azure SignalR Service instance
 
 1. Click on the **New** (**+**) button for creating a new Azure resource.
+
 1. Search for **SignalR Service** and select it.
+
 1. Enter the following information.
 
     | Name | Value |
@@ -81,16 +86,20 @@ The following software is required to build this tutorial.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-new-function-project-screenshot.png)
 
+
 ### Install function app extensions
 
 This tutorial uses Azure Functions bindings to interact with Azure Cosmos DB and Azure SignalR Service. These bindings are available as extensions that need to be installed using the Azure Functions Core Tools CLI before they can be used.
 
 1. Open a terminal in VS Code by selecting `View > Integrated Terminal` from the menu (Ctrl-`).
+
 1. Ensure the main project folder is the current directory.
+
 1. Install the Cosmos DB function app extension.
     ```
     func extensions install -p Microsoft.Azure.WebJobs.Extensions.CosmosDB -v 3.0.0-beta7
     ```
+
 1. Install the SignalR Service function app extension.
     ```
     func extensions install -p AzureAdvocates.WebJobs.Extensions.SignalRService -v 0.2.0-alpha
@@ -123,6 +132,7 @@ When running and debugging the Azure Functions runtime locally, application sett
     * Enter the Azure Cosmos DB connection string into a setting named `AzureWebJobsCosmosDBConnectionString`. Obtain the value from the **Keys** page in the Cosmos DB account in the Azure portal.
     * The `WEBSITE_NODE_DEFAULT_VERSION` setting is not used locally, but is required when deployed to Azure.
     * The `Host` section configures the port and CORS settings for the local Functions host.
+
 1. Save the file.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-localsettings-screenshot.png)
@@ -135,7 +145,9 @@ When running and debugging the Azure Functions runtime locally, application sett
 #### Create the function
 
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
+
 1. Search for and select the **Azure Functions: Create Function** command.
+
 1. When prompted, provide the following information.
 
     | Name | Value |
@@ -146,6 +158,7 @@ When running and debugging the Azure Functions runtime locally, application sett
     | Authorization level | Anonymous |
     
     A folder named **CreateMessage** is created that contains the new function.
+
 1. Open **CreateMessage/function.json** to configure bindings for the function. Modify the content of the file to the following.
     ```javascript
     {
@@ -180,7 +193,9 @@ When running and debugging the Azure Functions runtime locally, application sett
     This makes two changes to the function:
     * Changes the route to `messages` and restricts the HTTP trigger to the **POST** HTTP method.
     * Adds a Cosmos DB output binding that saves documents to a collection named `messages` in a database named `chat`.
+
 1. Save the file.
+
 1. Open **CreateMessage/index.js** to view the body of the function. Modify the content of the file to the following.
     ```javascript
     module.exports = function (context, req) {  
@@ -189,14 +204,20 @@ When running and debugging the Azure Functions runtime locally, application sett
     };
     ```
     This function takes the body from the HTTP request and saves it as a document in Azure Cosmos DB.
+
 1. Save the file.
+
 
 #### (Optional) Test the function
 
 1. To run the function app locally, press **F5** in VS Code. If this is the first time, the Azure Functions host will start in the VS Code integrated terminal.
+
 1. When the functions runtime is successfully started, the terminal output will display a URL for the local **CreateMessage** endpoint (by default, it is `http://localhost:7071/api/messages`).
+
 1. Open Postman. Postman is an application to send HTTP requests.
+
 1. Select `File > Import` from the menu.
+
 1. Choose **Import from link** and paste in
     ```
     https://raw.githubusercontent.com/Azure-Samples/functions-serverless-chat-app-tutorial/master/requests/SignalRChat.postman_collection.json`
@@ -206,12 +227,15 @@ When running and debugging the Azure Functions runtime locally, application sett
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/postman-import-screenshot.png)
 
 1. In the **SignalR Chat** collection, select the **Create a message** request.
+
 1. Confirm the URL matches the one outputted by the function host and there is JSON message in the request body.
+
 1. Click **Send**. The function app should return an HTTP status of 200.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/postman-test-createmessage-screenshot.png)
 
 1. In the Azure portal, open the Cosmos DB account resource you created earlier.
+
 1. Using the Cosmos DB Data Explorer, locate the **messages** collection in the **chat** database. The message sent from Postman should appear as a document in the collection.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/cosmosdb-data-explorer-screenshot.png)
@@ -220,12 +244,15 @@ When running and debugging the Azure Functions runtime locally, application sett
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-disconnect-functions-debug-screenshot.png)
 
+
 ### GetMessages function
 
 #### Create the function
 
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
+
 1. Search for and select the **Azure Functions: Create Function** command.
+
 1. When prompted, provide the following information.
 
     | Name | Value |
@@ -236,6 +263,7 @@ When running and debugging the Azure Functions runtime locally, application sett
     | Authorization level | Anonymous |
     
     A folder named **GetMessages** is created that contains the new function.
+
 1. Open **GetMessages/function.json** to configure bindings for the function. Modify the content of the file to the following.
     ```javascript
     {
@@ -270,7 +298,9 @@ When running and debugging the Azure Functions runtime locally, application sett
     This makes two changes to the function:
     * Changes the route to `messages` and restricts the HTTP trigger to the **GET** HTTP method.
     * Adds a Cosmos DB input binding that retrieves documents (in reverse chronological order) from a collection named `messages` in a database named `chat`.
+
 1. Save the file.
+
 1. Open **GetMessages/index.js** to view the body of the function. Modify the content of the file to the following.
     ```javascript
     module.exports = function (context, req, messages) {
@@ -279,15 +309,22 @@ When running and debugging the Azure Functions runtime locally, application sett
     };
     ```
     This function takes the documents retrieved from Cosmos DB (chat messages in reverse chronological order) and returns them in the HTTP response body.
+
 1. Save the file.
+
 
 #### (Optional) Test the function
 
 1. To run the function app locally, press **F5** in VS Code. If this is the first time, the Azure Functions host will start in the VS Code integrated terminal.
+
 1. When the functions runtime is successfully started, the terminal output will display URLs for the local **CreateMessage** and **GetMessages** endpoints (by default, they are `http://localhost:7071/api/messages`).
+
 1. (See above to open Postman and import a collection) In Postman, in the **SignalR Chat** collection, select the **Get messages** request.
+
 1. Confirm the URL matches the one outputted by the function host and the HTTP method is **GET**.
+
 1. Click **Send**. The function app should return the messages from Cosmos DB.
+
 1. Press the **Disconnect** button to disconnect the debugger from the function host.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/postman-test-getmessages-screenshot.png)
@@ -298,12 +335,19 @@ When running and debugging the Azure Functions runtime locally, application sett
 The chat application's UI is a simple single page application (SPA) created with Vue JavaScript framework. It will be hosted separately from the function app. Locally, you will run the web interface using the Live Server VS Code extension.
 
 1. In VS Code, create a new folder named **content** at the root of the main project folder.
+
 1. In the **content** folder, create a new file named **index.html**.
+
 1. Copy and paste the content of **[index.html](https://raw.githubusercontent.com/Azure-Samples/functions-serverless-chat-app-tutorial/master/snippets/index.html)**.
+
 1. Save the file.
+
 1. Press **F5** to run the function app locally (it may already be running) and attach a debugger.
+
 1. With **index.html** open, start Live Server by opening the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) and selecting **Live Server: Open with Live Server**. Live Server will open the application in a browser.
+
 1. When the application prompts for a username, enter one. If you tested the function earlier, messages from your testing session will appear.
+
 1. Enter a message in the chat box and press enter. Refresh the application to see new messages.
 
 Next, you will integrate Azure SignalR Service into your application to allow messages to appear in real-time.
@@ -318,7 +362,9 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 #### Create the function
 
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
+
 1. Search for and select the **Azure Functions: Create Function** command.
+
 1. When prompted, provide the following information.
 
     | Name | Value |
@@ -329,6 +375,7 @@ Next, you will integrate Azure SignalR Service into your application to allow me
     | Authorization level | Anonymous |
     
     A folder named **SignalRInfo** is created that contains the new function.
+
 1. Open **SignalRInfo/function.json** to configure bindings for the function. Modify the content of the file to the following. This adds an input binding that generates valid credentials for a client to connect to an Azure SignalR Service hub named `chat`.
     ```javascript
     {
@@ -354,6 +401,7 @@ Next, you will integrate Azure SignalR Service into your application to allow me
         ]
     }
     ```
+
 1. Open **SignalRInfo/index.js** to view the body of the function. Modify the content of the file to the following.
     ```javascript
     module.exports = function (context, req, connectionInfo) {
@@ -363,13 +411,19 @@ Next, you will integrate Azure SignalR Service into your application to allow me
     ```
     This function takes the SignalR connection information from the input binding and returns it to the client in the HTTP response body.
 
+
 #### (Optional) Test the function
 
 1. To run the function app locally, press **F5** in VS Code. If this is the first time, the Azure Functions host will start in the VS Code integrated terminal.
+
 1. When the functions runtime is successfully started, the terminal output will display URLs for the local endpoints, including **SignalRInfo** (by default, they are `http://localhost:7071/api/SignalRInfo`).
+
 1. (See above to open Postman and import a collection) In Postman, in the **SignalR Chat** collection, select the **Get SignalR info** request.
+
 1. Confirm the URL matches the one outputted by the function host and the HTTP method is **GET**.
+
 1. Click **Send**. The function app should return connection information for SignalR Service.
+
 1. Press the **Disconnect** button to disconnect the debugger from the function host.
 
 
@@ -414,6 +468,7 @@ Next, you will integrate Azure SignalR Service into your application to allow me
         ]
     }
     ```
+
 1. Open **CreateMessage/index.js** to view the body of the function. Modify the content of the file to the following. This adds a line to output new chat messages to all clients connected to the SignalR Service hub.
     ```javascript
     module.exports = function (context, req) {  
@@ -429,7 +484,9 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 #### Test the app
 
 1. Press **F5** to run the function app locally (it may already be running) and attach a debugger.
+
 1. With **index.html** open, start Live Server by opening the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) and selecting **Live Server: Open with Live Server**. Live Server will open the application in a browser.
+
 1. Now, new messages will appear as soon as they are sent. Open the app in more than one browser to see the real-time capabilities in action.
 
 
@@ -438,13 +495,18 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 ### Log into Azure
 
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
+
 1. Search for and select the **Azure: Sign in** command.
+
 1. Follow the instructions to complete the sign in process in your browser.
+
 
 ### Deploy function app
 
 1. Select the Azure icon on the VS Code activity bar (left side).
+
 1. Hover your mouse over the **Functions** pane and click the **Deploy to Function App** button.
+
 1. When prompted, provide the following information.
 
     | Name | Value |
@@ -459,14 +521,18 @@ Next, you will integrate Azure SignalR Service into your application to allow me
     | Location | Select a location close to you |
     
     A new function app is created in Azure and the deployment begins.
+
 1. If prompted to switch the function app version from *latest* to *beta*, select **Update remote runtime**.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-update-function-version-screenshot.png)
 
+
 ### Upload function app local settings
 
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
+
 1. Search for and select the **Azure Functions: Upload local settings** command.
+
 1. When prompted, provide the following information.
 
     | Name | Value |
@@ -480,19 +546,26 @@ Local settings are uploaded to the function app in Azure. If prompted to overwri
 
 ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-update-function-settings-screenshot.png)
 
+
 ### Enable function app cross origin resource sharing (CORS)
 
 Although there is a CORS setting in **local.settings.json**, it is not propagated to the function app in Azure. You need to set it separately.
 
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
+
 1. Search for and select the **Azure Functions: Open in portal** command.
+
 1. Select the subscription and function app name to open the function app in the Azure portal.
+
 1. Under the **Platform features** tab, select **CORS**.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/functions-platform-features-screenshot.png)
 
+
 1. Add an entry with the value `*`.
+
 1. Remove all other existing entries.
+
 1. Click **Save** to persist the CORS settings.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/functions-cors-screenshot.png)
@@ -502,21 +575,26 @@ Although there is a CORS setting in **local.settings.json**, it is not propagate
 ### Update function app URL in chat UI
 
 1. In the Azure portal, navigate to the function app's overview page.
+
 1. Copy the function app's URL.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/functions-get-url-screenshot.png)
 
 1. In VS Code, open **index.html** and replace the value of `window.apiBaseUrl` with the function app's URL.
+
 1. Save the file.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-paste-function-url-screenshot.png)
+
 
 ### Deploy web UI to blob storage
 
 The web UI will be hosted using Azure Blob Storage's static websites feature.
 
 1. Click on the **New** (**+**) button for creating a new Azure resource.
+
 1. Under **Storage**, select **Storage account**.
+
 1. Enter the following information.
 
     | Name | Value |
@@ -534,15 +612,21 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/create-storage-screenshot.png)
 
 1. Click **Create**.
+
 1. When the storage account is created, open it in the Azure portal.
+
 1. Select **Static website (preview)** in the left navigation.
+
 1. Select **Enable**.
+
 1. Enter `index.html` as the **Index document name**.
+
 1. Click **Save**.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/storage-enable-static-websites-screenshot.png)
 
 1. Click on the **$web** link on the page to open the blob container.
+
 1. Click **Upload** and upload all the files in the **content** folder.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/storage-upload-screenshot.png)
@@ -552,4 +636,3 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/storage-primary-endpoint-screenshot.png)
 
 The chat application will appear. Congratulations on creating and deploying a serverless chat application to Azure!
-
