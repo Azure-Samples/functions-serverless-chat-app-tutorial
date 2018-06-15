@@ -1,13 +1,13 @@
-# Serverless chat app with Azure Functions
+# Build a real-time serverless chat app with Azure Functions
 
 ## Introduction
 
 ### Technologies used
 
-* Azure Storage - Host the static website for the chat client UI
-* Azure Functions - Backend API for creating and retrieving chat messages
-* Azure Cosmos DB - Store chat messages
-* Azure SignalR Service - Broadcast new messages to connected chat clients
+* [Azure Storage](https://azure.microsoft.com/services/storage/?WT.mc_id=serverlesschatlab-tutorial-antchu) - Host the static website for the chat client UI
+* [Azure Functions](https://azure.microsoft.com/services/functions/?WT.mc_id=serverlesschatlab-tutorial-antchu) - Backend API for creating and retrieving chat messages
+* [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/?WT.mc_id=serverlesschatlab-tutorial-antchu) - Store chat messages
+* [Azure SignalR Service](https://azure.microsoft.com/services/signalr-service/?WT.mc_id=serverlesschatlab-tutorial-antchu) - Broadcast new messages to connected chat clients
 
 ### Prerequisites
 
@@ -15,13 +15,13 @@
 
 The following software is required to build this tutorial.
 
-* Git
-* Node.js (Version 8.x)
-* Azure Functions Core Tools (Version 2)
-* Visual Studio Code (VS Code) with the following extensions
-    * Azure Functions
-    * Live Server
-* Postman (optional, for testing Azure Functions)
+* [Git](https://git-scm.com/downloads)
+* [Node.js](https://nodejs.org/en/download/) (Version 8.x)
+* [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools) (Version 2)
+* [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=serverlesschatlab-tutorial-antchu) (VS Code) with the following extensions
+    * [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions&WT.mc_id=serverlesschatlab-tutorial-antchu)
+    * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=serverlesschatlab-tutorial-antchu)
+* [Postman](https://www.getpostman.com/) (optional, for testing Azure Functions)
 
 
 ## Create Azure resources
