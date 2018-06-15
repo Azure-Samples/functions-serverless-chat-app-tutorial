@@ -23,7 +23,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"sender\": \"anthony\",\n\t\"message\": \"hello\"\n}"
+					"raw": "{\n\t\"sender\": \"anthony\",\n\t\"text\": \"hello\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:7071/api/messages",
