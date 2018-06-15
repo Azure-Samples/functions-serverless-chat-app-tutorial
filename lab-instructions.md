@@ -26,6 +26,8 @@ The following software is required to build this tutorial.
 
 ## Create Azure resources
 
+You will build and test the Azure Functions app locally. The app will access some services in Azure that need to be created ahead of time.
+
 ### Log into the Azure portal
 
 1. Go to the [Azure portal](https://portal.azure.com/) and log in with your credentials.
@@ -355,7 +357,10 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 
 ## Display real-time messages with Azure SignalR Service
 
-{intro here}
+Azure SignalR Service provides real-time messaging capabilities to supported clients, including web browsers. You will use Azure Functions to integrate with SignalR Service to broadcast new chat messages in real-time to connected browsers.
+
+> The SignalR Service binding extension in Azure Functions is currently a community-supported project.
+
 
 ### SignalRInfo function
 
@@ -492,7 +497,10 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 
 ## Deploy to Azure
 
-### Log into Azure
+You have been running the function app and chat application locally. You will now deploy them to Azure.
+
+
+### Log into Azure with VS Code
 
 1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 
