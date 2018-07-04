@@ -423,7 +423,7 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
     ```
 
 1. Open **SignalRInfo/index.js** to view the body of the function. Modify the content of the file to the following.
-    ```javascript
+    ```nocopy
     module.exports = function (context, req, connectionInfo) {
         context.res = { body: connectionInfo };
         context.done();
@@ -490,7 +490,7 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
     ```
 
 1. Open **CreateMessage/index.js** to view the body of the function. Modify the content of the file to the following. This adds a line to output new chat messages to all clients connected to the SignalR Service hub.
-    ```javascript
+    ```nocopy
     module.exports = function (context, req) {  
         context.bindings.cosmosDBMessage = req.body;
         context.bindings.signalRMessages = [{
