@@ -16,7 +16,7 @@
 The following software is required to build this tutorial.
 
 * [Git](https://git-scm.com/downloads)
-* [Node.js](https://nodejs.org/en/download/) (Version 8.x)
+* [Node.js](https://nodejs.org/en/download/) (Version 10.x)
 * [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools) (Version 2)
 * [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=serverlesschatlab-tutorial-antchu) (VS Code) with the following extensions
     * [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions&WT.mc_id=serverlesschatlab-tutorial-antchu)
@@ -90,7 +90,7 @@ You will build and test the Azure Functions app locally. The app will access som
     1. Open the Command Palette in VS Code by selecting `View > Command Palette` from the menu (shortcut `Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
     1. Search for the "Azure Functions: Create New Project" command and select it.
     1. The main project folder should appear. Select it (or use "Browse" to locate it).
-    1. In the prompt to choose a language, select JavaScript.
+    1. In the prompt to choose a language, select **JavaScript**.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-new-function-project-screenshot.png)
 
@@ -128,7 +128,8 @@ When running and debugging the Azure Functions runtime locally, application sett
         "Values": {
             "AzureSignalRConnectionString": "<signalr-connection-string>",
             "AzureWebJobsCosmosDBConnectionString": "<cosmosdb-connection-string>",
-            "WEBSITE_NODE_DEFAULT_VERSION": "8.11.1"
+            "WEBSITE_NODE_DEFAULT_VERSION": "10.0.0",
+            "FUNCTIONS_WORKER_RUNTIME": "node"
         },
         "Host": {
             "LocalHttpPort": 7071,
@@ -136,8 +137,8 @@ When running and debugging the Azure Functions runtime locally, application sett
         }
     }
     ```
-    * Enter the Azure SignalR Service connection string into a setting named `AzureSignalRConnectionString`. Obtain the value from the **Keys** page in the Azure SignalR Service resource in the Azure portal.
-    * Enter the Azure Cosmos DB connection string into a setting named `AzureWebJobsCosmosDBConnectionString`. Obtain the value from the **Keys** page in the Cosmos DB account in the Azure portal.
+    * Enter the Azure SignalR Service connection string into a setting named `AzureSignalRConnectionString`. Obtain the value from the **Keys** page in the Azure SignalR Service resource in the Azure portal; either than primary or secondary connection string can be used.
+    * Enter the Azure Cosmos DB connection string into a setting named `AzureWebJobsCosmosDBConnectionString`. Obtain the value from the **Keys** page in the Cosmos DB account in the Azure portal; either than primary or secondary connection string can be used.
     * The `WEBSITE_NODE_DEFAULT_VERSION` setting is not used locally, but is required when deployed to Azure.
     * The `Host` section configures the port and CORS settings for the local Functions host.
 
@@ -231,9 +232,9 @@ When running and debugging the Azure Functions runtime locally, application sett
 
 1. Choose **Import from link** and paste in
     ```nocopy
-    https://raw.githubusercontent.com/Azure-Samples/functions-serverless-chat-app-tutorial/master/requests/SignalRChat.postman_collection.json`
+    https://raw.githubusercontent.com/Azure-Samples/functions-serverless-chat-app-tutorial/master/requests/SignalRChat.postman_collection.json
     ```
-    This loads a collection of HTTP requests for testing the function app locally.
+    This loads a collection of HTTP requests for testing the function app locally. Click on the **Collections** tab in Postman to see it.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/postman-import-screenshot.png)
 
@@ -251,7 +252,7 @@ When running and debugging the Azure Functions runtime locally, application sett
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/cosmosdb-data-explorer-screenshot.png)
 
-1. Press the **Disconnect** button to disconnect the debugger from the function host.
+1. Click the **Disconnect** button to disconnect the debugger from the function host.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-disconnect-functions-debug-screenshot.png)
 
@@ -423,12 +424,14 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
     ```
 
 1. Open **SignalRInfo/index.js** to view the body of the function. Modify the content of the file to the following.
+
     ```nocopy
     module.exports = function (context, req, connectionInfo) {
         context.res = { body: connectionInfo };
         context.done();
     };
     ```
+
     This function takes the SignalR connection information from the input binding and returns it to the client in the HTTP response body.
 
 
@@ -490,6 +493,7 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
     ```
 
 1. Open **CreateMessage/index.js** to view the body of the function. Modify the content of the file to the following. This adds a line to output new chat messages to all clients connected to the SignalR Service hub.
+
     ```nocopy
     module.exports = function (context, req) {  
         context.bindings.cosmosDBMessage = req.body;
@@ -628,7 +632,7 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
     | Name | A unique name for the blob storage account |
     | Deployment model | Resource manager |
     | Account kind | StorageV2 (general purpose V2) |
-    | Location | Select West Central US or West US 2 (only regions supported in Public Preview) |
+    | Location | Select the same region as your other resources |
     | Replication | Locally-redundant storage (LRS) |
     | Performance | Standard |
     | Access tier | Hot |
