@@ -16,12 +16,9 @@
 The following software is required to build this tutorial.
 
 * [Git](https://git-scm.com/downloads)
-* [Node.js](https://nodejs.org/en/download/) (Version 8.x)
+* [Node.js](https://nodejs.org/en/download/) (Version 10.x)
 * [.NET SDK](https://www.microsoft.com/net/download?WT.mc_id=serverlesschatlab-tutorial-antchu) (Version 2.x, required for Functions extensions)
 * [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools) (Version 2)
-    ```nocopy
-    npm i -g azure-functions-core-tools@2.0.1-beta.28 --unsafe-perm true
-    ```
 * [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=serverlesschatlab-tutorial-antchu) (VS Code) with the following extensions
     * [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions&WT.mc_id=serverlesschatlab-tutorial-antchu)
     * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=serverlesschatlab-tutorial-antchu)
@@ -107,6 +104,11 @@ This tutorial uses Azure Functions bindings to interact with Azure Cosmos DB and
 
 1. Ensure the main project folder is the current directory.
 
+1. Install the Cosmos DB Core extension (prerequisite for the Cosmos DB extension).
+    ```
+    func extensions install -p Microsoft.Azure.DocumentDB.Core -v 2.0.0-preview
+    ```
+
 1. Install the Cosmos DB function app extension.
     ```
     func extensions install -p Microsoft.Azure.WebJobs.Extensions.CosmosDB -v 3.0.0-beta7
@@ -132,7 +134,7 @@ When running and debugging the Azure Functions runtime locally, application sett
         "Values": {
             "AzureSignalRConnectionString": "<signalr-connection-string>",
             "AzureWebJobsCosmosDBConnectionString": "<cosmosdb-connection-string>",
-            "WEBSITE_NODE_DEFAULT_VERSION": "8.11.1",
+            "WEBSITE_NODE_DEFAULT_VERSION": "10.0.0",
             "FUNCTIONS_WORKER_RUNTIME": "node"
         },
         "Host": {
