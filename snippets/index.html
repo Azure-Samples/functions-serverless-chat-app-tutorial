@@ -5,22 +5,40 @@
   <script>
     window.apiBaseUrl = 'http://localhost:7071';
   </script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous" />
 </head>
 
 <body>
-  <div id="app">
-    <div class="signalr-demo">
-      <form v-on:submit.prevent="sendNewMessage">
-        message: <input type="text" v-model="newMessage" id="message-box" class="form-control" />
-      </form>
-      <div v-if="!ready">Loading...</div>
-      <div v-if="ready">
+  <div id="app" class="container">
+    <div class="row">
+      <div class="signalr-demo col-sm">
         <hr />
-        <ul>
-            <li v-for="message in messages">
-              {{ message.sender }}: {{ message.text }}
-            </li>
-        </ul>
+        <h3>Serverless chat</h3>
+      <form v-on:submit.prevent="sendNewMessage">
+          <input type="text" v-model="newMessage" id="message-box" class="form-control form-control-lg" 
+            placeholder="Type message here..." />
+      </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+      <div v-if="!ready">Loading...</div>
+      </div>
+    </div>
+      <div v-if="ready">
+      <div class="row" v-for="message in messages">
+        <div class="col-sm">
+        <hr />
+          <div>
+            <span class="text-info small"><strong>{{ message.sender }}</strong></span>
+            <span class="text-muted small">{{ message.timeago }}</small>
+          </div>
+          <div>
+            {{ message.text }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -28,6 +46,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://unpkg.com/@aspnet/signalr@1.0.0-rc1-final/dist/browser/signalr.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/timeago.js@3.0.2/dist/timeago.min.js"></script>
   <script>
     const data = {
       username: '',
@@ -39,7 +58,7 @@
       el: '#app',
       data: data,
       methods: {
-        sendNewMessage: function() {
+        sendNewMessage: function () {
           sendMessage(this.username, this.newMessage);
           this.newMessage = '';
         }
@@ -55,7 +74,7 @@
       data.ready = true;
       console.log('retrieving messages');
       getMessages().then(messages => {
-        for(let m of messages.reverse()) {
+        for (let m of messages.reverse()) {
           newMessage(m);
         }
       });
@@ -74,7 +93,9 @@
         connection.start()
           .then(() => console.log('connected!'))
           .catch(console.error);
+
       }).catch(console.error);
+      setInterval(refreshTimes, 1000);
     }
     function getAxiosConfig() {
       const config = {};
@@ -98,7 +119,12 @@
       if (!message.sender) {
         message.sender = "anonymous";
       }
+      message._ts = message._ts || (new Date().getTime() / 1000);
+      message.timeago = timeago().format(new Date(message._ts * 1000));
       data.messages.unshift(message);
+    }
+    function refreshTimes() {
+      data.messages.forEach(m => m.timeago = timeago().format(new Date(m._ts * 1000)));
     }
   </script>
 </body>
