@@ -24,6 +24,9 @@ The following software is required to build this tutorial.
 * [Postman](https://www.getpostman.com/) (optional, for testing Azure Functions)
 
 
+===
+
+
 ## Create Azure resources
 
 You will build and test the Azure Functions app locally. The app will access some services in Azure that need to be created ahead of time.
@@ -44,7 +47,7 @@ You will build and test the Azure Functions app locally. The app will access som
     |---|---|
     | ID | A unique name for the Cosmos DB account |
     | API | SQL |
-    | Resource group | New |
+    | Resource group | New - enter a new resource group name |
     | Location | Select a location close to you |
     
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/create-cosmosdb-screenshot.png)
@@ -70,6 +73,9 @@ You will build and test the Azure Functions app locally. The app will access som
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/create-signalr-screenshot.png)
     
 1. Click **Create**.
+
+
+===
 
 
 ## Initialize the function app
@@ -138,6 +144,9 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. Save the file.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-localsettings-screenshot.png)
+
+
+===
 
 
 ## Create Azure Functions to save and retrieve chat messages
@@ -332,6 +341,9 @@ When running and debugging the Azure Functions runtime locally, application sett
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/postman-test-getmessages-screenshot.png)
 
 
+===
+
+
 ## Create and run the chat client web user interface
 
 The chat application's UI is a simple single page application (SPA) created with Vue JavaScript framework. It will be hosted separately from the function app. Locally, you will run the web interface using the Live Server VS Code extension.
@@ -353,6 +365,9 @@ The chat application's UI is a simple single page application (SPA) created with
 1. Enter a message in the chat box and press enter. Refresh the application to see new messages.
 
 Next, you will integrate Azure SignalR Service into your application to allow messages to appear in real-time.
+
+
+===
 
 
 ## Display real-time messages with Azure SignalR Service
@@ -493,6 +508,9 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
 1. With **index.html** open, start Live Server by opening the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`) and selecting **Live Server: Open with Live Server**. Live Server will open the application in a browser.
 
 1. Now, new messages will appear as soon as they are sent. Open the app in more than one browser to see the real-time capabilities in action.
+
+
+===
 
 
 ## Deploy to Azure
