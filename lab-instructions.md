@@ -16,9 +16,12 @@
 The following software is required to build this tutorial.
 
 * [Git](https://git-scm.com/downloads)
-* [Node.js](https://nodejs.org/en/download/) (Version 10.x)
+* [Node.js](https://nodejs.org/en/download/) (Version 8.x)
 * [.NET SDK](https://www.microsoft.com/net/download?WT.mc_id=serverlesschatlab-tutorial-antchu) (Version 2.x, required for Functions extensions)
 * [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools) (Version 2)
+    ```nocopy
+    npm i -g azure-functions-core-tools@2.0.1-beta.28 --unsafe-perm true
+    ```
 * [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=serverlesschatlab-tutorial-antchu) (VS Code) with the following extensions
     * [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions&WT.mc_id=serverlesschatlab-tutorial-antchu)
     * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=serverlesschatlab-tutorial-antchu)
