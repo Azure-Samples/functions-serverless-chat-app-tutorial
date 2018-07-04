@@ -132,7 +132,7 @@ When running and debugging the Azure Functions runtime locally, application sett
         "Values": {
             "AzureSignalRConnectionString": "<signalr-connection-string>",
             "AzureWebJobsCosmosDBConnectionString": "<cosmosdb-connection-string>",
-            "WEBSITE_NODE_DEFAULT_VERSION": "10.0.0",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.11.1",
             "FUNCTIONS_WORKER_RUNTIME": "node"
         },
         "Host": {
