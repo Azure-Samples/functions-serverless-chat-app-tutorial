@@ -34,7 +34,7 @@ You will build and test the Azure Functions app locally. The app will access som
 
 ### Create an Azure Cosmos DB account
 
-1. Click on the **New** (**+**) button for creating a new Azure resource.
+1. Click on the **Create a resource** (**+**) button for creating a new Azure resource.
 
 1. Under **Databases**, select **Azure Cosmos DB**.
 
@@ -54,9 +54,9 @@ You will build and test the Azure Functions app locally. The app will access som
 
 ### Create an Azure SignalR Service instance
 
-1. Click on the **New** (**+**) button for creating a new Azure resource.
+1. Click on the **Create a resource** (**+**) button for creating a new Azure resource.
 
-1. Search for **SignalR Service** and select it.
+1. Search for **SignalR Service** and select it. Click **Create**.
 
 1. Enter the following information.
 
@@ -82,9 +82,9 @@ You will build and test the Azure Functions app locally. The app will access som
 
 1. Using the Azure Functions extension in VS Code, initialize a Function app in the main project folder.
     1. Open the Command Palette in VS Code by selecting `View > Command Palette` from the menu (shortcut `Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
-    1. Search for the "Azure Functions: Create New Project" command. Select it and press Enter.
-    1. The main project folder should appear. Select it and press Enter (or use "Browse" to locate it).
-    1. In the prompt to select a language, choose JavaScript and press Enter.
+    1. Search for the "Azure Functions: Create New Project" command and select it.
+    1. The main project folder should appear. Select it (or use "Browse" to locate it).
+    1. In the prompt to choose a language, select JavaScript.
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-new-function-project-screenshot.png)
 
