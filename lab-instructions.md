@@ -122,7 +122,7 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. In VS Code, select **local.settings.json** in the Explorer pane to open it.
 
 1. Replace the file's contents with the following.
-    ```javascript
+    ```nocopy
     {
         "IsEncrypted": false,
         "Values": {
@@ -171,7 +171,7 @@ When running and debugging the Azure Functions runtime locally, application sett
     A folder named **CreateMessage** is created that contains the new function.
 
 1. Open **CreateMessage/function.json** to configure bindings for the function. Modify the content of the file to the following.
-    ```javascript
+    ```nocopy
     {
         "disabled": false,
         "bindings": [
@@ -208,7 +208,7 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. Save the file.
 
 1. Open **CreateMessage/index.js** to view the body of the function. Modify the content of the file to the following.
-    ```javascript
+    ```nocopy
     module.exports = function (context, req) {  
         context.bindings.cosmosDBMessage = req.body;
         context.done();
@@ -230,7 +230,7 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. Select `File > Import` from the menu.
 
 1. Choose **Import from link** and paste in
-    ```
+    ```nocopy
     https://raw.githubusercontent.com/Azure-Samples/functions-serverless-chat-app-tutorial/master/requests/SignalRChat.postman_collection.json`
     ```
     This loads a collection of HTTP requests for testing the function app locally.
@@ -276,7 +276,7 @@ When running and debugging the Azure Functions runtime locally, application sett
     A folder named **GetMessages** is created that contains the new function.
 
 1. Open **GetMessages/function.json** to configure bindings for the function. Modify the content of the file to the following.
-    ```javascript
+    ```nocopy
     {
         "disabled": false,
         "bindings": [
@@ -313,7 +313,7 @@ When running and debugging the Azure Functions runtime locally, application sett
 1. Save the file.
 
 1. Open **GetMessages/index.js** to view the body of the function. Modify the content of the file to the following.
-    ```javascript
+    ```nocopy
     module.exports = function (context, req, messages) {
         context.res.body = messages;
         context.done();
@@ -397,7 +397,7 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
     A folder named **SignalRInfo** is created that contains the new function.
 
 1. Open **SignalRInfo/function.json** to configure bindings for the function. Modify the content of the file to the following. This adds an input binding that generates valid credentials for a client to connect to an Azure SignalR Service hub named `chat`.
-    ```javascript
+    ```nocopy
     {
         "disabled": false,
         "bindings": [
@@ -452,7 +452,7 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
 #### Update the CreateMessage function
 
 1. Open **CreateMessage/function.json** to configure bindings for the function. Add a `signalR` output binding by replacing the file's contents with the following.
-    ```javascript
+    ```nocopy
     {
         "disabled": false,
         "bindings": [
