@@ -116,7 +116,7 @@ This tutorial uses Azure Functions bindings to interact with Azure Cosmos DB and
 
 1. Install the SignalR Service function app extension.
     ```
-    func extensions install -p AzureAdvocates.WebJobs.Extensions.SignalRService -v 0.2.0-alpha
+    func extensions install -p AzureAdvocates.WebJobs.Extensions.SignalRService -v 0.3.0-alpha
     ```
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-install-func-extensions-screenshot.png)
