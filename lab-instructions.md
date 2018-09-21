@@ -104,14 +104,9 @@ This tutorial uses Azure Functions bindings to interact with Azure Cosmos DB and
 
 1. Ensure the main project folder is the current directory.
 
-1. Install the Cosmos DB Core extension (prerequisite for the Cosmos DB extension).
-    ```
-    func extensions install -p Microsoft.Azure.DocumentDB.Core -v 2.0.0-preview
-    ```
-
 1. Install the Cosmos DB function app extension.
     ```
-    func extensions install -p Microsoft.Azure.WebJobs.Extensions.CosmosDB -v 3.0.0-beta7
+    func extensions install -p Microsoft.Azure.WebJobs.Extensions.CosmosDB -v 3.0.1
     ```
 
 1. Install the SignalR Service function app extension.
@@ -203,7 +198,8 @@ When running and debugging the Azure Functions runtime locally, application sett
                 "databaseName": "chat",
                 "collectionName": "messages",
                 "createIfNotExists": true, 
-                "direction": "out"
+                "direction": "out",
+                "connectionStringSetting": "AzureWebJobsCosmosDBConnectionString"
             }
         ]
     }
@@ -308,7 +304,8 @@ When running and debugging the Azure Functions runtime locally, application sett
                 "databaseName": "chat",
                 "collectionName": "messages",
                 "sqlQuery": "select * from c order by c._ts desc",
-                "direction": "in"
+                "direction": "in",
+                "connectionStringSetting": "AzureWebJobsCosmosDBConnectionString"
             }
         ]
     }
@@ -486,7 +483,8 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
                 "databaseName": "chat",
                 "collectionName": "messages",
                 "createIfNotExists": true, 
-                "direction": "out"
+                "direction": "out",
+                "connectionStringSetting": "AzureWebJobsCosmosDBConnectionString"
             },
             {
                 "type": "signalR",
