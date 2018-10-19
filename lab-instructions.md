@@ -11,7 +11,7 @@
 
 ### Prerequisites
 
-> If you are using a prepared virtual machine for this lab, all prerequisites should already be installed.
+<!-- >> If you are using a prepared virtual machine for this lab, all prerequisites should already be installed. -->
 
 The following software is required to build this tutorial.
 
@@ -79,7 +79,7 @@ You will build and test the Azure Functions app locally. The app will access som
 ===
 
 
-## Initialize the function app
+## Initialize a function app
 
 ### Create a new Azure Functions project
 
@@ -104,19 +104,14 @@ This tutorial uses Azure Functions bindings to interact with Azure Cosmos DB and
 
 1. Ensure the main project folder is the current directory.
 
-1. Install the Cosmos DB Core extension (prerequisite for the Cosmos DB extension).
-    ```
-    func extensions install -p Microsoft.Azure.DocumentDB.Core -v 2.0.0-preview
-    ```
-
 1. Install the Cosmos DB function app extension.
     ```
-    func extensions install -p Microsoft.Azure.WebJobs.Extensions.CosmosDB -v 3.0.0-beta7
+    func extensions install -p Microsoft.Azure.WebJobs.Extensions.CosmosDB -v 3.0.1
     ```
 
 1. Install the SignalR Service function app extension.
     ```
-    func extensions install -p AzureAdvocates.WebJobs.Extensions.SignalRService -v 0.3.0-alpha
+    func extensions install -p Microsoft.Azure.WebJobs.Extensions.SignalRService -v 1.0.0-preview1-10002
     ```
 
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-install-func-extensions-screenshot.png)
@@ -133,8 +128,8 @@ When running and debugging the Azure Functions runtime locally, application sett
         "IsEncrypted": false,
         "Values": {
             "AzureSignalRConnectionString": "<signalr-connection-string>",
-            "AzureWebJobsCosmosDBConnectionString": "<cosmosdb-connection-string>",
-            "WEBSITE_NODE_DEFAULT_VERSION": "10.0.0",
+            "CosmosDBConnectionString": "<cosmosdb-connection-string>",
+            "WEBSITE_NODE_DEFAULT_VERSION": "10.6.0",
             "FUNCTIONS_WORKER_RUNTIME": "node"
         },
         "Host": {
@@ -144,7 +139,7 @@ When running and debugging the Azure Functions runtime locally, application sett
     }
     ```
     * Enter the Azure SignalR Service connection string into a setting named `AzureSignalRConnectionString`. Obtain the value from the **Keys** page in the Azure SignalR Service resource in the Azure portal; either than primary or secondary connection string can be used.
-    * Enter the Azure Cosmos DB connection string into a setting named `AzureWebJobsCosmosDBConnectionString`. Obtain the value from the **Keys** page in the Cosmos DB account in the Azure portal; either than primary or secondary connection string can be used.
+    * Enter the Azure Cosmos DB connection string into a setting named `CosmosDBConnectionString`. Obtain the value from the **Keys** page in the Cosmos DB account in the Azure portal; either than primary or secondary connection string can be used.
     * The `WEBSITE_NODE_DEFAULT_VERSION` setting is not used locally, but is required when deployed to Azure.
     * The `Host` section configures the port and CORS settings for the local Functions host.
 
@@ -203,6 +198,7 @@ When running and debugging the Azure Functions runtime locally, application sett
                 "databaseName": "chat",
                 "collectionName": "messages",
                 "createIfNotExists": true, 
+                "connectionStringSetting": "CosmosDBConnectionString",
                 "direction": "out"
             }
         ]
@@ -308,6 +304,7 @@ When running and debugging the Azure Functions runtime locally, application sett
                 "databaseName": "chat",
                 "collectionName": "messages",
                 "sqlQuery": "select * from c order by c._ts desc",
+                "connectionStringSetting": "CosmosDBConnectionString",
                 "direction": "in"
             }
         ]
@@ -380,8 +377,6 @@ Next, you will integrate Azure SignalR Service into your application to allow me
 ## Display real-time messages with Azure SignalR Service
 
 Azure SignalR Service provides real-time messaging capabilities to supported clients, including web browsers. You will use Azure Functions to integrate with SignalR Service to broadcast new chat messages in real-time to connected browsers.
-
-> The SignalR Service binding extension in Azure Functions is currently a community-supported project.
 
 
 ### SignalRInfo function
@@ -486,6 +481,7 @@ Azure SignalR Service provides real-time messaging capabilities to supported cli
                 "databaseName": "chat",
                 "collectionName": "messages",
                 "createIfNotExists": true, 
+                "connectionStringSetting": "CosmosDBConnectionString",
                 "direction": "out"
             },
             {
@@ -539,9 +535,9 @@ You have been running the function app and chat application locally. You will no
 
 ### Deploy function app
 
-1. Select the Azure icon on the VS Code activity bar (left side).
+1. Open the VS Code command palette (`Ctrl-Shift-P`, macOS: `Cmd-Shift-P`).
 
-1. Hover your mouse over the **Functions** pane and click the **Deploy to Function App** button.
+1. Search for and select the **Azure Functions: Deploy to Function App** command.
 
 1. When prompted, provide the following information.
 
@@ -556,11 +552,7 @@ You have been running the function app and chat application locally. You will no
     | Storage account name | Enter a unique name (3-24 characters, alphanumeric only) |
     | Location | Select a location close to you |
     
-    A new function app is created in Azure and the deployment begins.
-
-1. If prompted to switch the function app version from *latest* to *beta*, select **Update remote runtime**.
-
-    ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/vscode-update-function-version-screenshot.png)
+    A new function app is created in Azure and the deployment begins. The Azure Functions VS Code extension will first create the Azure resources; then it will deploy the function app. Wait for deployment to complete.
 
 
 ### Upload function app local settings
@@ -635,15 +627,13 @@ The web UI will be hosted using Azure Blob Storage's static websites feature.
 
     | Name | Value |
     |---|---|
-    | Name | A unique name for the blob storage account |
-    | Deployment model | Resource manager |
-    | Account kind | StorageV2 (general purpose V2) |
-    | Location | Select the same region as your other resources |
-    | Replication | Locally-redundant storage (LRS) |
-    | Performance | Standard |
-    | Access tier | Hot |
-    | Secure transfer required | Enabled |
     | Resource group | Select the same resource group as the Cosmos DB account |
+    | Storage account name | A unique name for the blob storage account |
+    | Location | Select the same region as your other resources |
+    | Performance | Standard |
+    | Account kind | StorageV2 (general purpose V2) |
+    | Replication | Locally-redundant storage (LRS) |
+    | Access tier | Hot |
     
     ![](https://github.com/Azure-Samples/functions-serverless-chat-app-tutorial/raw/master/media/create-storage-screenshot.png)
 

@@ -65,7 +65,7 @@
       }
     });
     const apiBaseUrl = window.apiBaseUrl;
-    const hubName = 'simplechat';
+    const hubName = 'chat';
     while (!data.username && data.username !== null) {
       data.username = prompt('Enter a username');
     }
@@ -80,10 +80,10 @@
       });
       getConnectionInfo().then(info => {
         const options = {
-          accessTokenFactory: () => info.accessKey
+          accessTokenFactory: () => info.accessToken
         };
         const connection = new signalR.HubConnectionBuilder()
-          .withUrl(info.endpoint, options)
+          .withUrl(info.url, options)
           .configureLogging(signalR.LogLevel.Information)
           .build();
           
